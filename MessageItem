@@ -1,0 +1,36 @@
+import React from 'react';
+
+export default function MessageItem({ mail, onDelete }) {
+  // Logic: 15 days = Flagged, 30 days = Critical
+  const isFlagged = mail.age >= 15 && mail.age < 30;
+  const isCritical = mail.age >= 30;
+
+  return (
+    <div className={`p-4 border-b border-slate-800 flex items-center justify-between 
+      ${isFlagged ? 'bg-amber-900/10 border-l-4 border-l-amber-500' : ''} 
+      ${isCritical ? 'bg-red-900/20 border-l-4 border-l-red-600 animate-pulse' : ''}`}>
+      
+      <div className="flex-1">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-mono text-slate-500">{mail.timestamp}</span>
+          {isCritical && <span className="text-[10px] bg-red-600 px-2 py-0.5 rounded-full font-bold">24H_LEFT</span>}
+        </div>
+        <h3 className="font-bold text-slate-200">{mail.subject}</h3>
+        <p className="text-sm text-slate-400 truncate">{mail.preview}</p>
+      </div>
+
+      {/* The Syndicate "Clean-Up" Actions */}
+      <div className="flex gap-2">
+        {(isFlagged || isCritical) && (
+          <button 
+            onClick={() => onDelete(mail.id)}
+            className="bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white px-3 py-1 rounded text-xs font-bold border border-red-600/40 transition-all"
+          >
+            PURGE_BLOB
+          </button>
+        )}
+        <button className="text-slate-500 hover:text-cyan-400">OPEN</button>
+      </div>
+    </div>
+  );
+}
