@@ -1,0 +1,37 @@
+module suimail::core {
+    use sui::coin::{Self, Coin};
+    use sui::sui::SUI;
+    use sui::tx_context::{Self, TxContext};
+    use sui::transfer;
+
+    /// Error code for insufficient funds to cover the tax
+    const EInsufficientBalance: u64 = 0;
+
+    public entry fun transfer_with_tax(
+        payment: &mut Coin<SUI>,
+        amount: u64,
+        recipient: address,
+        dev_wallet: address,
+        treasury_wallet: address,
+        ctx: &mut TxContext
+    ) {
+        // 1. Calculate the 2% taxes (Amount * 2 / 100)
+        let dev_fee_amount = (amount * 2) / 100;
+        let treasury_fee_amount = (amount * 2) / 100;
+        let total_tax = dev_fee_amount + treasury_fee_amount;
+        let net_amount = amount - total_tax;
+
+        // 2. Safety Check: Ensure the payment object has enough for the full amount
+        assert!(coin::value(payment) >= amount, EInsufficientBalance);
+
+        // 3. Split the coin into three distinct objects
+        let dev_fee = coin::split(payment, dev_fee_amount, ctx);
+        let treasury_fee = coin::split(payment, treasury_fee_amount, ctx);
+        let payment_to_recipient = coin::split(payment, net_amount, ctx);
+
+        // 4. Send the objects to their respective Sovereign destinations
+        transfer::public_transfer(dev_fee, dev_wallet);
+        transfer::public_transfer(treasury_fee, treasury_wallet);
+        transfer::public_transfer(payment_to_recipient, recipient);
+    }
+}
