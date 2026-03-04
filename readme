@@ -1,0 +1,33 @@
+# 📬 SuiMail: The Sovereign Communication Layer (#3675)
+
+SuiMail is a decentralized, 3D-immersive communication protocol built on **Sui** and **Walrus**. We are moving beyond the "Data-Harvesting" era of email into a **Sovereign** model where your data is your property, and your inbox is a 3D asset.
+
+## 🚀 The Vision
+Most Web3 communication is still tied to centralized notification servers. SuiMail decentralizes the entire stack:
+- **Logic:** Native Sui Move smart contracts.
+- **Storage:** Metadata and 3D assets hosted on **Walrus Protocol**.
+- **Economy:** Automated **2% Dev / 2% Treasury** tax model to ensure perpetual storage funding and protocol growth.
+
+## 🛠️ Technical Implementation
+This repository contains the core **Sui Move** modules for the SuiMail protocol.
+
+### Core Features
+- **Atomic Splits:** Every transaction natively splits taxes for the protocol treasury, enabling a self-sustaining ecosystem.
+- **PTB Ready:** Functions are optimized for **Programmable Transaction Blocks**, allowing batch mail-and-pay actions.
+- **Walrus Integration:** Frontend assets are sharded and stored as permanent Blobs.
+
+### Current Progress (7-Day Sprint)
+- [x] Phase 1: Core 2%/2% Tax Logic (Move)
+- [ ] Phase 2: Testnet Deployment & Verification
+- [ ] Phase 3: Walrus-based 3D Landing Page
+- [ ] Phase 4: Mainnet Launch & Creator Partnerships
+
+## 📦 Getting Started
+1. **Build:** `sui move build`
+2. **Test:** `sui move test`
+3. **Deploy:** `sui client publish --gas-budget 100000000`
+
+## 🤝 Join the Team
+We are currently seeking **1 Front-End (3D/UX)** and **1 Back-End (Move/Infra)** lead to join our core team of 3 for the **Colosseum Accelerator**. 
+
+If you understand **Sovereignty**, check out our project on [Colosseum Arena #3675](https://arena.colosseum.org/).
