@@ -1,0 +1,9 @@
+[package]
+name = "suimail"
+version = "0.0.1"
+
+[dependencies]
+Sui = { git = "https://github.com/MystenLabs/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+
+[addresses]
+suimail = "0x0" # This will be replaced upon deployment
